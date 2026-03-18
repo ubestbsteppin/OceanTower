@@ -449,6 +449,82 @@
     .footer-links a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
     .footer-links a:hover { color: var(--sky); }
     .footer-copy { color: rgba(255,255,255,0.25); font-size: 0.75rem; }
+
+    /* ── HAMBURGER ── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 6px;
+    }
+    .nav-toggle span {
+      display: block; width: 24px; height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 2px; transition: all 0.3s;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none; position: absolute;
+        top: 68px; left: 0; right: 0;
+        background: rgba(28,43,53,0.98);
+        flex-direction: column; gap: 0;
+        padding: 8px 0 16px;
+        border-top: 1px solid rgba(255,255,255,0.08);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { list-style: none; }
+      .nav-links a { display: block; padding: 12px 24px; font-size: 0.9rem; }
+      .nav-cta { margin: 8px 16px 0; text-align: center; border-radius: 4px; }
+
+      section { padding: 60px 20px; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 48px; margin-top: 40px; }
+      .about-badge { right: 0; bottom: -16px; }
+      .about-details { grid-template-columns: 1fr; }
+
+      .stat { padding: 20px 24px; }
+      .stat-number { font-size: 2rem; }
+
+      .announcements-grid { grid-template-columns: 1fr; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 180px 180px 180px;
+      }
+      .gallery-item:first-child { grid-row: span 1; grid-column: span 2; }
+
+      .resources-grid { grid-template-columns: 1fr 1fr; }
+
+      .portal-lock { inset: -8px; }
+      .lock-form { flex-direction: column; align-items: stretch; width: 100%; max-width: 300px; }
+      .lock-input { min-width: unset; width: 100%; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; }
+      .btn-submit { width: 100%; }
+
+      footer {
+        padding: 24px 20px;
+        flex-direction: column; align-items: center; text-align: center;
+      }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+
+      .lightbox-header { padding: 16px 20px; }
+      .lightbox-grid { padding: 20px 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .resources-grid { grid-template-columns: 1fr; }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .gallery-item:first-child { grid-column: span 1; }
+      .gallery-item { height: 220px; }
+    }
   </style>
 </head>
 <body>
@@ -456,12 +532,15 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Ocean <span>Tower</span></a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="this.nextElementSibling.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#announcements">Announcements</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#resources">Portal</a></li>
-    <li><a href="#contact" class="nav-cta">Contact</a></li>
+    <li><a href="#about" onclick="this.closest('.nav-links').classList.remove('open')">About</a></li>
+    <li><a href="#announcements" onclick="this.closest('.nav-links').classList.remove('open')">Announcements</a></li>
+    <li><a href="#gallery" onclick="this.closest('.nav-links').classList.remove('open')">Gallery</a></li>
+    <li><a href="#resources" onclick="this.closest('.nav-links').classList.remove('open')">Portal</a></li>
+    <li><a href="#contact" class="nav-cta" onclick="this.closest('.nav-links').classList.remove('open')">Contact</a></li>
   </ul>
 </nav>
 
